@@ -43,7 +43,7 @@
                 url = `https://tiku.fenbi.com/api/xingce/universal/auth/solutions?type=8&id=${location.href.match(/id=([^&]+)/)[1]}&checkId=${location.href.match(/checkId=([^&]+)/)[1]}&app=web&kav=100&av=100&hav=100&version=3.0.0.0`
             }
             else {
-                url = `https://tiku.fenbi.com/api/xingce/exercises/${location.href.match(/\/(\d+)\/2/)[1]}?app=web&kav=100&av=100&hav=100&version=3.0.0.0`;
+                url = `https://tiku.fenbi.com/api/xingce/exercises/${location.href.match(/\/(\d+)\/\d/)[1]}?app=web&kav=100&av=100&hav=100&version=3.0.0.0`;
             }
             let xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
