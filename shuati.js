@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://www.fenbi.com/spa/tiku/report/preview/xingce/xingce/question*
+// @match        https://www.fenbi.com/spa/tiku/report/preview/xingce/xingce/*
 // @match        https://www.fenbi.com/spa/tiku/report/exam/solution/xingce/xingce/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=fenbi.com
 // @grant        none
@@ -37,8 +37,14 @@
     }
 
     function getCode(selector) {
-        if (location.href.includes("exam")) {
-            let url = `https://tiku.fenbi.com/api/xingce/exercises/${location.href.match(/\/(\d+)\/2/)[1]}?app=web&kav=100&av=100&hav=100&version=3.0.0.0`;
+        if (location.href.includes("exam") || location.href.includes("material")) {
+            let url;
+            if (location.href.includes("material")) {
+                url = `https://tiku.fenbi.com/api/xingce/universal/auth/solutions?type=8&id=${location.href.match(/id=([^&]+)/)[1]}&checkId=${location.href.match(/checkId=([^&]+)/)[1]}&app=web&kav=100&av=100&hav=100&version=3.0.0.0`
+            }
+            else {
+                url = `https://tiku.fenbi.com/api/xingce/exercises/${location.href.match(/\/(\d+)\/2/)[1]}?app=web&kav=100&av=100&hav=100&version=3.0.0.0`;
+            }
             let xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.withCredentials = true;
@@ -52,7 +58,13 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let response = xhr.response;
-                    let questionIds = response.sheet.questionIds;
+                    let questionIds;
+                    if (location.href.includes("material")) {
+                        questionIds = response.solutions.map(i => i.id);
+                    }
+                    else {
+                        questionIds = response.sheet.questionIds;
+                    }
                     let waterfallElements = document.querySelectorAll('.ng-trigger-waterfall');
                     for (var i = 0; i < waterfallElements.length; i++) {
                         let ulElement = waterfallElements[i].querySelector('ul');
