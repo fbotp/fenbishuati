@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         fenbi
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       rourou
 // @match        https://www.fenbi.com/spa/tiku/report/preview/xingce/xingce/*
 // @match        https://www.fenbi.com/spa/tiku/report/exam/solution/xingce/xingce/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=fenbi.com
+// @icon         https://fenbi.com/favicon.ico
 // @grant        none
 // ==/UserScript==
 
